@@ -1,6 +1,10 @@
 class User
-  def initialize
+  def initialize(hand, money, total)
+    @hand = hand
+    @money = money
+  end
 
+  def
 
   end
 

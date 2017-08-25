@@ -2,19 +2,19 @@ require_relative "deck"
 require_relative "card"
 
 class Game
-  def initialize(user, dealer)
+  def initialize(user, dealer, deck)
     @user = User.new
     @dealer = Dealer.new
     @deck = Deck.new
-    @dealer = Dealer.new
-    @User = User.new
   end
 
-  @deck.shuffle
+  def hit
+    @deck.draw
+  end
 
-  @deck.draw * 2
-  @deck.draw * 2 
-
-
+  def stand
+    # compare dealer hand to user hand
+    # if statement that compares User hand to Dealer hand
+  end
 
 end
