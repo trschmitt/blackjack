@@ -1,7 +1,9 @@
 require_relative "card"
 
 class Deck
+
   SUITS = [:clubs, :diamonds, :hearts, :spades]
+
   def initialize
     @cards = []
     @ranks = Card::RANKS
