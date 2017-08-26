@@ -1,6 +1,5 @@
 require "minitest/autorun"
 require_relative "../lib/deck"
-require "minitest/focus"
 
 class DeckTest < Minitest::Test
   def setup
