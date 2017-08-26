@@ -1,5 +1,3 @@
-require_relative "deck"
-
 class User
   attr_accessor :hand, :money, :ace_count, :hand_value
 
@@ -7,7 +5,14 @@ class User
     @hand = []
     @hand_value = 0
     @money = 100
-    @ace_count = ace_count
+  end
+
+  def hand
+    @hand
+  end
+
+  def hand_value
+    @hand_value
   end
 
 end

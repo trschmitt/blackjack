@@ -1,19 +1,12 @@
-require_relative "../lib/deck"
-require_relative "../lib/card"
-require_relative "../lib/user"
-require_relative "../lib/dealer"
+require_relative "lib/deck"
+require_relative "lib/card"
+require_relative "lib/user"
+require_relative "lib/dealer"
 
 puts "Blackjack... The ultimate game of luck and math. Are you Ready? Leh go..."
-game_deck = Deck.new
-
-
-dame_deck.shuffle
-
-game_deck.draw * 2 << @
-game_deck.draw * 2 << @user.hand
-
 class Game
-  def initialize(user, dealer, deck)
+
+  def initialize
     @user = User.new
     @dealer = Dealer.new
     @deck = Deck.new
@@ -23,15 +16,31 @@ class Game
     @deck.shuffle
   end
 
-  def user_hit
-    @deck.draw << @user.hand
+  def user_hand
+    @deck.draw * 2 << @user.hand
+  end
+
+  def user_move
+    while true
+      print "Do you want to (h)it or (s)tand?:"
+      answer = gets.chomp.downcase
+      if answer[1] == "h"
+        @deck.draw << @user.hand
+        return true
+      elsif answer[1] == "s"
+        return true
+      else
+        return false
+      end
+      print "Try again brah..."
+    end
   end
 
   def user_hand_value
 
   end
 
-  def stand
+  def dealer
 
   end
 
