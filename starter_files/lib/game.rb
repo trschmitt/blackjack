@@ -29,7 +29,8 @@ class Game
 
   def user_hand_init
     2.times do
-      user.hand << deck.draw
+      card = deck.draw
+
     end
   end
 
@@ -50,11 +51,11 @@ class Game
   end
 
   def user_hand_value
-    if Card.value == 1
-      @user.hand_value += 11
-    elsif Card.value == 2..10
-      @user.hand_value += Card.value
-    end
+    # if Card.value == 1
+    #   @user.hand_value += 11
+    # elsif Card.value == 2..10
+    #   @user.hand_value += Card.value
+    # end
   end
 
   def dealer
