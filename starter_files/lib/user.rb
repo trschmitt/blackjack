@@ -15,4 +15,8 @@ class User
     @hand_value
   end
 
+  def money
+    @money
+  end
+
 end
