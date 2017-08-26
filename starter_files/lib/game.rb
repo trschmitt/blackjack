@@ -11,12 +11,26 @@ class Game
     @deck = Deck.new
   end
 
-  def deck_shuffle
-    @deck.shuffle
+  def user
+    @user
   end
 
-  def user_hand
-    @deck.draw * 2 << @user.hand
+  def dealer
+    @dealer
+  end
+
+  def deck
+    @deck
+  end
+
+  def deck_shuffle
+    deck.shuffle
+  end
+
+  def user_hand_init
+    2.times do
+      user.hand << deck.draw
+    end
   end
 
   def user_move
@@ -24,7 +38,7 @@ class Game
       print "Do you want to (h)it or (s)tand?:"
       answer = gets.chomp.downcase
       if answer[1] == "h"
-        @deck.draw << @user.hand
+        user.hand << deck.draw
         return true
       elsif answer[1] == "s"
         return true

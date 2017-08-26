@@ -19,7 +19,7 @@ class Deck
   end
 
   def draw
-    @cards.shift
+    @cards.pop
   end
 
   def shuffle
