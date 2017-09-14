@@ -93,6 +93,12 @@ class Game
 
   def play_blackjack
     @dealer = Dealer.new
+
+    while @user.money.to_i > 9
+      @user.hand = []
+      @dealer.hand = []
+      
+    end
   end
 
 end
