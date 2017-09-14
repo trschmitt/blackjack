@@ -36,15 +36,30 @@ class Game
   end
 
   def hit(player)
-    player.hand << deck.draw
+    player.hand << @deck.draw
+  end
+
+  def dealer_special
+    while hand_value(@dealer) < 17
+      hit(@dealer)
+    end
+    if hand_value(dealer) == 21
+      print "Dealer's hand is 21... They beat you... Try again mate! \n"
+      new_game
+    else
+      print "Dealer's hand is #{hand_value(@dealer)}.\n Your move! \n"
+    end
   end
 
   def ran_out_of_cards
-    if @deck.cards_length == 0
+    if @deck.cards.length == 0
       @deck = Deck.new
       @deck.shuffle
     end
+  end
 
+  def method
+    #code
   end
 
 end
