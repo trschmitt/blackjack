@@ -51,15 +51,48 @@ class Game
     end
   end
 
-  def ran_out_of_cards
-    if @deck.cards.length == 0
-      @deck = Deck.new
-      @deck.shuffle
+  # def ran_out_of_cards
+  #   if @deck.cards.length == 0
+  #     @deck = Deck.new
+  #     @deck.shuffle
+  #   end
+  # end
+
+  def new_game
+    print "Play again? (Y)es or (N)o? \n"
+    choice = gets.chomp.upcase
+    if chioce == "Y"
+      play_blackjack
+    elsif choice == "N"
+      print "Thanks for donating money to my vacation fund!! \n"
+      return
+    else
+      print "Nope try again... Press (Y) to play again or (N) to quit... Go on... \n"
+      choice
     end
   end
 
-  def method
-    #code
+  def hand_evaluation
+    if hand_value(@dealer) > hand_value(@user) && hand_value(@dealer) < 21
+      print "The dealer wins! Thanks for your money! \n"
+    elsif hand_value(@dealer) == hand_value(@user)
+      print "Tie game! \n"
+    else
+      print "You win! Hey look at that luck was on your side!! \n"
+      user_win
+    end
+  end
+
+  def bet
+    @user.money -= 10
+  end
+
+  def user_wins
+    @user.money += 20
+  end
+
+  def play_blackjack
+    @dealer = Dealer.new
   end
 
 end
