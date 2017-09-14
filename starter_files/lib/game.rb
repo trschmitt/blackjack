@@ -1,9 +1,11 @@
-require_relative "deck"
 require_relative "card"
-require_relative "user"
+require_relative "deck"
 require_relative "dealer"
+require_relative "user"
 
 class Game
+  
+  attr_accessor :user, :dealer, :deck
 
   def initialize
     @user = User.new

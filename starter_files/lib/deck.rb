@@ -1,7 +1,7 @@
 require_relative "card"
 
 class Deck
-
+  attr_reader :cards, :ranks
   SUITS = [:clubs, :diamonds, :hearts, :spades]
 
   def initialize
@@ -23,6 +23,6 @@ class Deck
   end
 
   def shuffle
-    @cards.shuffle
+    @cards = @cards.shuffle
   end
 end
