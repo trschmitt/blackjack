@@ -2,6 +2,7 @@ require_relative "card"
 require_relative "deck"
 require_relative "dealer"
 require_relative "user"
+require "pry"
 
 class Game
 
@@ -25,8 +26,8 @@ class Game
       end
     end
 
-    player.hand.each do |ace|
-      if ace.rank.to_s == "A" && total.to_i <= 10
+    player.hand.each do |card|
+      if card.rank.to_s == "A" && total.to_i <= 10
         total += 10
       end
     end
@@ -51,21 +52,14 @@ class Game
     end
   end
 
-  # def ran_out_of_cards
-  #   if @deck.cards.length == 0
-  #     @deck = Deck.new
-  #     @deck.shuffle
-  #   end
-  # end
-
   def new_game
     print "Play again? (Y)es or (N)o? \n"
     choice = gets.chomp.upcase
-    if chioce == "Y"
+    if choice == "Y"
       play_blackjack
     elsif choice == "N"
       print "Thanks for donating money to my vacation fund!! \n"
-      return
+      exit
     else
       print "Nope try again... Press (Y) to play again or (N) to quit... Go on... \n"
       choice
@@ -78,8 +72,8 @@ class Game
     elsif hand_value(@dealer) == hand_value(@user)
       print "Tie game! \n"
     else
-      print "You win! Hey look at that luck was on your side!! \n"
-      user_win
+      print "You win! Hey look at that luck was on your side!! Unless you are counting.... -.-\n"
+      user_wins
     end
   end
 
@@ -97,8 +91,38 @@ class Game
     while @user.money.to_i > 9
       @user.hand = []
       @dealer.hand = []
+      @deck.shuffle
+      2.times { hit(@user) }
+      2.times { hit(@dealer) }
+      print "This... is Blackjack... Shall we? \n $#{@user.money} is how much you came in with... How much will you leave with? Table bet is $10. \n Your hand is: #{@user.hand[0].rank} of #{@user.hand[0].suit.upcase}, #{@user.hand[1].rank} of #{@user.hand[1].suit.upcase} which means your total hand value is #{hand_value(@user)}\n (H)it or (S)tand?\n"
+      bet
+
+      binding.pry
       
+      move = gets.chomp.upcase
+      if move == "H"
+        hit(@user)
+        print "You hit and add #{@user.hand[0].rank} of #{@user.hand[0].suit.upcase} to your hand.\n New total is #{hand_value(@user)}. Do you (H)it or (S)tand?\n"
+        move = gets.chomp.upcase
+      elsif move == "S"
+        print "You stand... Time to see what the Dealer has!\n"
+      else
+        print "Come on... Only two letters to choose from... Which shall it be (Y) or (N)?\n"
+        move = gets.chomp.upcase
+      end
+
+      if hand_value(@user) > 21
+        print "BUSTED! Better luck next time.\n"
+        new_game
+      elsif hand_value(@user) == 21
+        print "Well would you look at that... You hit 21 you win... Lucky\n"
+        user_wins
+        new_game
+      else
+        dealer_special
+        hand_evaluation
+        new_game
+      end
     end
   end
-
 end
