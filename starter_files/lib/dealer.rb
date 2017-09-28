@@ -1,9 +1,8 @@
 class Dealer
-  attr_accessor :hand, :hand_value
+  attr_accessor :hand
 
   def initialize
     @hand = []
-    @hand_value = 0
   end
 
   def hand
