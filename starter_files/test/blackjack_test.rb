@@ -1,17 +1,30 @@
 require "minitest/autorun"
-require_relative "../blackjack"
-require_relative "../lib/user"
-require_relative "../lib/deck"
+require_relative "../lib/game"
 
-# class UserTest < Minitest::Test
-#   i_suck_and_my_tests_are_order_dependent!
-#   def setup
-#     @deck = Deck.new
-#   end
-#
-#   # def test_that_user_has_a_hand
-#   #   card = @deck.draw
-#   #   card
-#   # end
-#
-# end
+class GameTest < Minitest::Test
+
+  def test_the_universe_still_works
+    assert true == true
+  end
+
+  def setup
+    @game = Game.new
+    @user = User.new
+    @dealer = Dealer.new
+  end
+
+  def test_user_bet
+    @user.money -= 10
+
+    assert_equal @user.money, 90
+  end
+
+  def test_user_hand_contains_cards
+    2.times{ @game.hit(@user) }
+
+    refute_empty @user.hand
+  end
+
+  
+
+end

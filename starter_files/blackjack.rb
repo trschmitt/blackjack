@@ -2,4 +2,4 @@ require_relative "lib/game"
 
 game = Game.new
 
-game.play_blackjack 
+game.play_blackjack
