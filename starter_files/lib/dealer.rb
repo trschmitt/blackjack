@@ -1,12 +1,5 @@
-class Dealer
-  attr_accessor :hand
+require_relative "player"
 
-  def initialize
-    @hand = []
-  end
-
-  def hand
-    @hand
-  end
+class Dealer < Player
 
 end

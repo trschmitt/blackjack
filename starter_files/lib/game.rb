@@ -2,6 +2,7 @@ require_relative "card"
 require_relative "deck"
 require_relative "dealer"
 require_relative "user"
+require_relative "player"
 require "byebug"
 
 class Game
@@ -20,21 +21,22 @@ class Game
       if x.rank == :J || x.rank == :Q || x.rank == :K
         acc + 10
       elsif x.rank == :A
-        acc + 11
+        acc + 1
       else
       acc + x.rank.to_i
       end
     end
 
     player.hand.each do |card|
-      if card.rank == :A || total.to_i >= 10
-        total - 10
+      if card.rank == :A || total.to_i <= 12
+        total + 10
       end
     end
 
     total
-
   end
+
+
 
   def hit(player)
     player.hand.unshift(@deck.draw)
@@ -49,7 +51,7 @@ class Game
       new_game
     elsif hand_value(@dealer) > 21
       print "Dealer busted you win!!\n"
-      user_wins
+      @user.win
       new_game
     end
   end
@@ -75,30 +77,22 @@ class Game
       print "Tie game! \n"
     else
       print "You win! Hey look at that luck was on your side!! Unless you are counting.... -.-\n"
-      user_wins
+      @user.win
     end
-  end
-
-  def bet
-    @user.money -= 10
-  end
-
-  def user_wins
-    @user.money += 20
   end
 
   def play_blackjack
     @dealer = Dealer.new
 
     while @user.money.to_i > 0
-      @user.hand = []
-      @dealer.hand = []
+      @user.reset
+      @dealer.reset
       @deck.shuffle
       2.times{ hit(@user) }
       2.times{ hit(@dealer) }
       print "This... is Blackjack... Shall we? \n $#{@user.money} is how much you came in with... How much will you leave with? Table bet is $10. \n Your hand is: #{@user.hand[0].rank} of #{@user.hand[0].suit.upcase}, #{@user.hand[1].rank} of #{@user.hand[1].suit.upcase} which means your total hand value is #{hand_value(@user)}\n (H)it or (S)tand?\n"
       move = gets.chomp.upcase
-      bet
+      @user.bet
       until hand_value(@user) >= 21 || move == "S"
         if move == "H"
           hit(@user)
@@ -117,7 +111,7 @@ class Game
         new_game
       elsif hand_value(@user) == 21
         print "Well would you look at that... You hit 21 you win... Lucky\n"
-        user_wins
+        @user.win
         new_game
       else
         dealer_special

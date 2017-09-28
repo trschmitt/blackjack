@@ -1,19 +1,21 @@
-require_relative "deck"
+require_relative "player"
 
-class User
-  attr_accessor :hand, :money
+class User < Player
+  attr_accessor :money
 
   def initialize
-    @hand = []
     @money = 100
-  end
-
-  def hand
-    @hand
   end
 
   def money
     @money
   end
 
+  def bet
+    @money -= 10
+  end
+
+  def win
+    @money += 20
+  end
 end
