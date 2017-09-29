@@ -4,11 +4,8 @@ class User < Player
   attr_accessor :money
 
   def initialize
+    super
     @money = 100
-  end
-
-  def money
-    @money
   end
 
   def bet

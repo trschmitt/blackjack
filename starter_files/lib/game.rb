@@ -10,6 +10,7 @@ class Game
   attr_accessor :user, :dealer, :deck
 
   def initialize
+
     @user = User.new
     @deck = Deck.new
     @deck.shuffle
@@ -32,7 +33,6 @@ class Game
         total + 10
       end
     end
-
     total
   end
 

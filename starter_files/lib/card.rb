@@ -8,8 +8,6 @@ class Card
     @suit = suit
   end
 
-  attr_reader :suit, :rank
-
   def greater_than?(card)
     value > card.value
   end

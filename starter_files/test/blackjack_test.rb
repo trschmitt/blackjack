@@ -20,7 +20,7 @@ class GameTest < Minitest::Test
   end
 
   def test_user_hand_contains_cards
-    2.times{ @user.hit }
+    2.times{ @game.hit(@user) }
 
     refute_empty @user.hand
   end
